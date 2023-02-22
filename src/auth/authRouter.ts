@@ -3,12 +3,9 @@ import { body, validationResult } from "express-validator";
 import { RequestValidationError } from "../errors/requestValidationError";
 import { User } from "../models/user";
 import { Password } from "../utils/password";
-
 import jwt from "jsonwebtoken";
 import { NotAuthorizedError } from "../errors/not-authorized-error";
-
 const router = express.Router();
-
 router.post(
   "/auth/signup",
   [
@@ -21,22 +18,18 @@ router.post(
   async (req: Request, res: Response) => {
     console.log("handling create user request...");
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       // console.log(errors.array());
       throw new RequestValidationError(errors.array());
       // console.log("%%%%%%%%%%%%%%%%%\n",err.serializeErrors());
     }
     const { name,email, password } = req.body;
-
     const hashedPassword = await Password.toHash(password);
-
     const newUser = new User({ name,email, password:hashedPassword });
     console.log("Saving new user...");
     try {
       const savedUser = await newUser.save();
       console.log("Saved User: ", savedUser);
-
       const token = jwt.sign({
         id: savedUser!._id,
         email: savedUser!.email,
@@ -45,15 +38,12 @@ router.post(
       process.env.JWT_KEY!);
       console.log("Setting up jwt token...");
       req.session = {jwt:token};
-
       res.status(201).send({ user: {name: savedUser.name, email: savedUser.email} });
     } catch {
       // console.log(savedUser);
       throw new Error("Could not save user!");
     }
-
     // console.log(newUser);
-
     // res.status(200).send();
   }
 );
@@ -69,8 +59,6 @@ router.post("/auth/info",
         throw new RequestValidationError(errors.array());
         // console.log("%%%%%%%%%%%%%%%%%\n",err.serializeErrors());
       }
-
-
   const {email } = req.body;
   const user = await User.findOne({ email });
   return res.send( user  ?    { user:{ name:user!.name, email: user!.email} }: {user:null});
@@ -79,7 +67,6 @@ router.post("/auth/info",
   // }
   // else{
   //     return res.send({userExist: false});
-
   // }
 });
 
@@ -90,7 +77,7 @@ interface UserPayload{
   name:string;
 }
 router.get("/auth/currentUser", async (req:Request,res:Response)=>{
-  console.log("VAlidating current user...")
+  console.log("Validating current user...")
   if(req.session){
     try{
       const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY!) as UserPayload;
