@@ -38,7 +38,7 @@ router.post(
       process.env.JWT_KEY!);
       console.log("Setting up jwt token...");
       req.session = {jwt:token};
-      res.status(201).send(JSON.stringify({ user: {name: savedUser.name, email: savedUser.email} }));
+      res.status(201).send({ user: {name: savedUser.name, email: savedUser.email} });
     } catch {
       // console.log(savedUser);
       throw new Error("Could not save user!");
@@ -61,7 +61,7 @@ router.post("/auth/info",
       }
   const {email } = req.body;
   const user = await User.findOne({ email });
-  return res.send( user  ?    JSON.stringify({ user:{ name:user!.name, email: user!.email} }): JSON.stringify({user:null}));
+  return res.send( user  ?    { user:{ name:user!.name, email: user!.email} }: {user:null});
   // if(existingUser){
   //     return res.send({userExist: true});
   // }
