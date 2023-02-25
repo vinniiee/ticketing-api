@@ -21,7 +21,7 @@ app.use((0, cookie_session_1.default)({
 }));
 app.use((0, body_parser_1.json)());
 app.use((0, cors_1.default)({
-    origin: ["https://glittery-melba-88ab24.netlify.app/", "https://ticketing-client-wheat.vercel.app/", "https://ticketing-client*"],
+    origin: ["http://localhost:3001", "https://glittery-melba-88ab24.netlify.app/", "https://ticketing-client-wheat.vercel.app/", "https://ticketing-client"],
     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "x-xsrf-token", "Set-Cookie"],
     credentials: true,
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
