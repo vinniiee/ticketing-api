@@ -14,8 +14,6 @@ const start = async ()=>{
         console.log("Connecting to database...");
         await mongoose.connect(process.env.MONGO_URI);
         console.log("Connected to databse!");
-        // console.log(mongoose.connection.host);
-        // console.log(mongoose.connection.port);        // console.log(mongoose);
     }
     catch{
         throw new Error("Could not establish connection with database!");
