@@ -28,7 +28,7 @@ app.use(json());
 // }));
 
 app.use((req:Request,res:Response,next:NextFunction)=>{
-    res.header("Access-Control-Allow-Origin","https://glittery-melba-88ab24.netlify.app/events");
+    res.header("Access-Control-Allow-Origin","https://glittery-melba-88ab24.netlify.app");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
