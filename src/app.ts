@@ -21,7 +21,7 @@ app.use(
 
 app.use(json());
 app.use(cors({
-  origin:"*",
+  origin:"https://ticketing-client-wheat.vercel.app/",
   allowedHeaders: [ "Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "x-xsrf-token","Set-Cookie" ],
   credentials:true
 }))
