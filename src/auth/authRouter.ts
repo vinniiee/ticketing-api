@@ -76,6 +76,12 @@ interface UserPayload{
   id:string;
   name:string;
 }
+interface FoundUser{
+  _id:string;
+  name:string;
+  email:string;
+  password:string;
+}
 router.get("/auth/currentUser", async (req:Request,res:Response)=>{
   console.log("Validating current user...")
   if(req.session){
@@ -106,7 +112,7 @@ async (req:Request,res:Response)=>{
 
   console.log("Handling signin request...");
   const {email,password} = req.body;
-  const user = await User.findOne({email});
+  const user  = await User.findOne({email}) as FoundUser;
 
   const validCredentials = await Password.compare(user!.password,password);
   console.log("Validating credentials...");
