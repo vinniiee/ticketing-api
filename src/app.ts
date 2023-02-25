@@ -20,13 +20,7 @@ app.use(
 
 
 app.use(json());
-app.use(cors({
-  origin:"*",
-  allowedHeaders: [ "Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "x-xsrf-token","Set-Cookie" ],
-  credentials:true,
-  methods:['GET','POST','DELETE','UPDATE','PUT','PATCH']
-  
-}))
+app.use(cors());
 app.all("/auth/*", authRouter);
 // app.all("*",(req,res)=>{
 //     res.send("Hello!")
