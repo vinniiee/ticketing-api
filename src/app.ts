@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import "express-async-errors";
@@ -21,14 +21,11 @@ app.use(
 
 app.use(json());
 app.use(cors({
-  
-  origin:"http://localhost:3001",
+  origin:"*",
   allowedHeaders: [ "Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "x-xsrf-token","Set-Cookie" ],
   credentials:true
-
 }))
 app.all("/auth/*", authRouter);
-
 // app.all("*",(req,res)=>{
 //     res.send("Hello!")
 // })
@@ -36,6 +33,4 @@ app.all("*", () => {
   throw new NotFoundError();
 });
 app.use(errorHandler);
-
-
 export default app;

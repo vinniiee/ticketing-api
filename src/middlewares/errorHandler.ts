@@ -10,14 +10,14 @@ export const errorHandler =  (
 ) => {
   if (err instanceof CustomError) {
     console.log("Handling invalid request");
-    return res.status(err.statusCode).send({ errors: err.serializeErrors() });
+    return res.status(err.statusCode).send(JSON.stringify({ errors: err.serializeErrors() }));
   }
 
-  res.status(400).send({
+  res.status(400).send(JSON.stringify({
     errors: [
       {
         message: "Something went wrong!",
       },
     ],
-  });
+  }));
 };

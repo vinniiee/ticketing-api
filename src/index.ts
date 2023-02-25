@@ -22,11 +22,8 @@ const start = async ()=>{
         throw new Error("Could not establish connection with database!");
     }
 
-    app.get("/",(req:Request,res:Response)=>{
-        res.send("Zippt - Ticketing API");
-    })
 
-    app.listen(3000, () => {
+    app.listen(3001, () => {
         console.log("Listening on port 3000...");
       });
 

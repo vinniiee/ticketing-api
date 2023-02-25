@@ -43,9 +43,11 @@ dotenv.config();
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!process.env.JWT_KEY) {
+            console.log("JWT key must be set");
             throw new Error("JWT key must be set");
         }
         if (!process.env.MONGO_URI) {
+            console.log("Mongo Uri must be set!");
             throw new Error("Mongo Uri must be set!");
         }
         console.log("Connecting to database...");
@@ -55,6 +57,9 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     catch (_a) {
         throw new Error("Could not establish connection with database!");
     }
+    app_1.default.get("/", (req, res) => {
+        res.send("Zippt - Ticketing API");
+    });
     app_1.default.listen(3000, () => {
         console.log("Listening on port 3000...");
     });
