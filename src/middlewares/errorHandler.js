@@ -5,14 +5,14 @@ const custom_error_1 = require("../errors/custom-error");
 const errorHandler = (err, req, res, next) => {
     if (err instanceof custom_error_1.CustomError) {
         console.log("Handling invalid request");
-        return res.status(err.statusCode).send({ errors: err.serializeErrors() });
+        return res.status(err.statusCode).send(JSON.stringify({ errors: err.serializeErrors() }));
     }
-    res.status(400).send({
+    res.status(400).send(JSON.stringify({
         errors: [
             {
                 message: "Something went wrong!",
             },
         ],
-    });
+    }));
 };
 exports.errorHandler = errorHandler;

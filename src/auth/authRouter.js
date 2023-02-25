@@ -83,17 +83,17 @@ router.get("/auth/currentUser", (req, res) => __awaiter(void 0, void 0, void 0, 
     if (req.session) {
         try {
             const payload = jsonwebtoken_1.default.verify(req.session.jwt, process.env.JWT_KEY);
-            return res.send({ user: {
+            return res.send(JSON.stringify({ user: {
                     email: payload.email,
                     name: payload.name
-                } });
+                } }));
         }
         catch (err) {
-            return res.send({ user: null });
+            return res.send(JSON.stringify({ user: null }));
         }
     }
     else {
-        return res.send({ user: null });
+        return res.send(JSON.stringify({ user: null }));
     }
 }));
 router.post("/auth/signin", [
@@ -117,12 +117,12 @@ router.post("/auth/signin", [
         }, process.env.JWT_KEY);
         console.log("Setting up jwt token...");
         req.session = { jwt: token };
-        res.status(200).send({ user: { name: user.name, email } });
+        res.status(200).send(JSON.stringify({ user: { name: user.name, email } }));
     }
     // console.log({user: { name:name,email:email }});
 }));
 router.get("/auth/signout", (req, res) => {
     console.log("Handling singout request");
     req.session = null;
-    res.send({ user: null });
+    res.send(JSON.stringify({ user: null }));
 });

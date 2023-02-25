@@ -61,6 +61,7 @@ router.post("/auth/info",
       }
   const {email } = req.body;
   const user = await User.findOne({ email });
+  
   return res.send( user  ?    { user:{ name:user!.name, email: user!.email} }: {user:null});
   // if(existingUser){
   //     return res.send({userExist: true});

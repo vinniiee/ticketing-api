@@ -21,10 +21,16 @@ app.use((0, cookie_session_1.default)({
 }));
 app.use((0, body_parser_1.json)());
 app.use((0, cors_1.default)({
-    origin: "http://localhost:3001",
+    origin: ["https://glittery-melba-88ab24.netlify.app/", "https://ticketing-client-wheat.vercel.app/", "https://ticketing-client*"],
     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization", "x-xsrf-token", "Set-Cookie"],
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
+// app.use((req:Request,res:Response,next:NextFunction)=>{
+//     res.header("Access-Control-Allow-Origin","https://glittery-melba-88ab24.netlify.app");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 app.all("/auth/*", authRouter_1.authRouter);
 // app.all("*",(req,res)=>{
 //     res.send("Hello!")
