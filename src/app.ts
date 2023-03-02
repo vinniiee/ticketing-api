@@ -11,15 +11,19 @@ const app = express();
 app.use(json());
 
 app.use(cors({
-  origin: 'https://ticketing-client-wheat.vercel.app',
   credentials: true,
+  origin: 'https://ticketing-client-wheat.vercel.app',
+  
 }));
+app.enable('trust proxy');
 // app.set("trust proxy", true);
 app.use(
   cookieSession({
     // name: 'session',
-    signed: false,
-    secure: false, //whether to require https explicitly
+    sameSite: 'none',
+    httpOnly: true,
+    // signed: false,
+    secure: true, //whether to require https explicitly
     // keys: ['key1', 'key2']
   })
 );
