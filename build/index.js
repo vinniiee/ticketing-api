@@ -57,7 +57,7 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     catch (_a) {
         throw new Error("Could not establish connection with database!");
     }
-    app_1.default.listen(3000, () => {
+    app_1.default.listen(process.env.PORT || 3000, () => {
         console.log("Listening on port 3000...");
     });
 });
