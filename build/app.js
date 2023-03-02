@@ -12,18 +12,21 @@ const authRouter_1 = require("./auth/authRouter");
 const errorHandler_1 = require("./middlewares/errorHandler");
 const not_found_error_1 = require("./errors/not-found-error");
 const app = (0, express_1.default)();
-app.set("trust proxy", true);
+app.use((0, body_parser_1.json)());
+app.use((0, cors_1.default)({
+    credentials: true,
+    origin: 'https://ticketing-client-wheat.vercel.app',
+}));
+app.enable('trust proxy');
+// app.set("trust proxy", true);
 app.use((0, cookie_session_1.default)({
     // name: 'session',
-    signed: false,
-    secure: false, //whether to require https explicitly
-    // keys: ['key1', 'key2']
+    sameSite: 'none',
+    httpOnly: true,
+    // signed: false,
+    secure: true,
+    keys: ['key1', 'key2']
 }));
-app.use((0, cors_1.default)({
-    origin: 'https://ticketing-client-wheat.vercel.app',
-    credentials: true,
-}));
-app.use((0, body_parser_1.json)());
 // app.use(function(req:Request, res:Response, next:NextFunction) {
 //   // res.header("Access-Control-Allow-Origin", "*");
 //   const allowedOrigins = ["http://localhost:3001","https://glittery-melba-88ab24.netlify.app/","https://ticketing-client-wheat.vercel.app/","https://ticketing-client"];

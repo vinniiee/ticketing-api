@@ -24,7 +24,7 @@ app.use(
     httpOnly: true,
     // signed: false,
     secure: true, //whether to require https explicitly
-    // keys: ['key1', 'key2']
+    keys: ['key1', 'key2']
   })
 );
 
