@@ -14,7 +14,7 @@ app.use(cors({
   origin: 'https://ticketing-client-wheat.vercel.app',
   credentials: true,
 }));
-app.set("trust proxy", true);
+// app.set("trust proxy", true);
 app.use(
   cookieSession({
     // name: 'session',
