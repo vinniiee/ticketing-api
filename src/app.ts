@@ -17,7 +17,10 @@ app.use(
     // keys: ['key1', 'key2']
   })
 );
-app.use(cors());
+app.use(cors({
+  origin: 'https://ticketing-client-wheat.vercel.app',
+  credentials: true,
+}));
 
 app.use(json());
 
