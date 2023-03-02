@@ -19,7 +19,10 @@ app.use((0, cookie_session_1.default)({
     secure: false, //whether to require https explicitly
     // keys: ['key1', 'key2']
 }));
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: 'https://ticketing-client-wheat.vercel.app',
+    credentials: true,
+}));
 app.use((0, body_parser_1.json)());
 // app.use(function(req:Request, res:Response, next:NextFunction) {
 //   // res.header("Access-Control-Allow-Origin", "*");

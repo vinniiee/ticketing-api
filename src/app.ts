@@ -8,6 +8,12 @@ import { errorHandler } from "./middlewares/errorHandler";
 import { NotFoundError } from "./errors/not-found-error";
 
 const app = express();
+app.use(json());
+
+app.use(cors({
+  origin: 'https://ticketing-client-wheat.vercel.app',
+  credentials: true,
+}));
 app.set("trust proxy", true);
 app.use(
   cookieSession({
@@ -17,12 +23,8 @@ app.use(
     // keys: ['key1', 'key2']
   })
 );
-app.use(cors({
-  origin: 'https://ticketing-client-wheat.vercel.app',
-  credentials: true,
-}));
 
-app.use(json());
+
 
 // app.use(function(req:Request, res:Response, next:NextFunction) {
 //   // res.header("Access-Control-Allow-Origin", "*");
